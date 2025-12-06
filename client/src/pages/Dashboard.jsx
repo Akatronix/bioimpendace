@@ -42,7 +42,7 @@ const Dashboard = () => {
       const response = await fetch(
         `${
           import.meta.env.VITE_BACKEND_URL
-        }/api/getData/6933ecb298c3026fc76d21ad`,
+        }/api/getData/693429901f7364e2c6ee76e9`,
         {
           method: "GET",
           headers: {
