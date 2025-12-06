@@ -1,0 +1,7 @@
+./client/node_modules
+./cllent/.env
+
+
+
+./server/.env
+./server/node_modules
