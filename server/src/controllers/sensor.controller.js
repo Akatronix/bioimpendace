@@ -10,11 +10,25 @@ async function updateController(req, res) {
         .status(400)
         .json({ success: false, message: "Sensor ID is required." });
     }
-    if (!hydration || !temperature || !heartRate || !gsr || !bioimpedance) {
-      return res
-        .status(400)
-        .json({ success: false, message: "All fields are required." });
-    }
+    // if (!hydration || !temperature || !heartRate || !gsr || !bioimpedance) {
+    //   return res
+    //     .status(400)
+    //     .json({ success: false, message: "All fields are required." });
+    // }
+
+
+    if (
+  hydration === undefined || hydration === null ||
+  temperature === undefined || temperature === null ||
+  heartRate === undefined || heartRate === null ||
+  gsr === undefined || gsr === null ||
+  bioimpedance === undefined || bioimpedance === null
+) {
+  return res.status(400).json({
+    success: false,
+    message: "All fields are required."
+  });
+}
     const updatedSensor = await SensorData.findByIdAndUpdate(
       sensorId,
       { hydration, temperature, heartRate, gsr, bioimpedance },
