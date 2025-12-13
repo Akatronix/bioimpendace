@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const sensorDataSchema = new mongoose.Schema({
-  hydration: Number,
-  temperature: Number,
-  heartRate: Number,
-  gsr: Number,
-  bioimpedance: Number,
+  hydration: String,
+  temperature: String,
+  heartRate: String,
+  gsr: String,
+  bioimpedance: String,
 
   timestamp: { type: Date, default: Date.now },
 });
