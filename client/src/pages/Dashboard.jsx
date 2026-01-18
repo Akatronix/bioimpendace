@@ -635,7 +635,7 @@ const Dashboard = () => {
   const healthMetrics = [
     {
       id: "hydration",
-      name: "Hydration",
+      name: "Hydration Risk",
       description: "Body water percentage",
       value: `${healthData.hydration}%`,
       icon: Droplets,
