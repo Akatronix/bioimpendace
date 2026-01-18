@@ -555,14 +555,6 @@ import {
   Heart,
   Zap,
   Battery,
-  Activity,
-  AlertTriangle,
-  CheckCircle,
-  Clock,
-  Settings,
-  Bell,
-  TrendingUp,
-  TrendingDown,
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -639,7 +631,7 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, []); // Empty dependency array to prevent re-creating interval
 
-  // Health metrics data - removed normal range and status
+  // Health metrics data - removed normal range, status, and trend
   const healthMetrics = [
     {
       id: "hydration",
@@ -648,7 +640,6 @@ const Dashboard = () => {
       value: `${healthData.hydration}%`,
       icon: Droplets,
       category: "Body Composition",
-      trend: healthData.hydration > 65 ? "up" : "down",
     },
     {
       id: "temperature",
@@ -657,7 +648,6 @@ const Dashboard = () => {
       value: `${healthData.temperature}°C`,
       icon: Thermometer,
       category: "Vital Signs",
-      trend: healthData.temperature > 36.8 ? "up" : "down",
     },
     {
       id: "heartRate",
@@ -666,7 +656,6 @@ const Dashboard = () => {
       value: `${healthData.heartRate} BPM`,
       icon: Heart,
       category: "Vital Signs",
-      trend: healthData.heartRate > 72 ? "up" : "down",
     },
     {
       id: "gsr",
@@ -675,7 +664,6 @@ const Dashboard = () => {
       value: `${healthData.gsr} μS`,
       icon: Zap,
       category: "Stress Levels",
-      trend: healthData.gsr > 5.2 ? "up" : "down",
     },
     {
       id: "bioimpedance",
@@ -684,7 +672,6 @@ const Dashboard = () => {
       value: `${healthData.bioimpedance} Ω`,
       icon: Battery,
       category: "Body Composition",
-      trend: healthData.bioimpedance > 480 ? "up" : "down",
     },
   ];
 
@@ -768,10 +755,6 @@ const Dashboard = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {categoryMetrics.map((metric) => {
                       const IconComponent = metric.icon;
-                      const TrendIcon =
-                        metric.trend === "up" ? TrendingUp : TrendingDown;
-                      const trendColor =
-                        metric.trend === "up" ? "text-green-500" : "text-red-500";
 
                       return (
                         <div
@@ -792,22 +775,10 @@ const Dashboard = () => {
                             </div>
                           </div>
 
-                          <div className="flex items-end justify-between mt-6">
-                            <div>
-                              <div className="text-3xl font-bold text-slate-900">
-                                {metric.value}
-                              </div>
-                              <div className="flex items-center gap-2 mt-2">
-                                <TrendIcon className={`w-4 h-4 ${trendColor}`} />
-                              </div>
+                          <div className="mt-6">
+                            <div className="text-3xl font-bold text-slate-900">
+                              {metric.value}
                             </div>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="group-hover:bg-slate-50 transition-colors"
-                            >
-                              Details
-                            </Button>
                           </div>
                         </div>
                       );
@@ -832,11 +803,6 @@ const Dashboard = () => {
           <CardContent className="pt-6">
             <div className="space-y-4">
               {healthMetrics.map((metric) => {
-                const TrendIcon =
-                  metric.trend === "up" ? TrendingUp : TrendingDown;
-                const trendColor =
-                  metric.trend === "up" ? "text-green-500" : "text-red-500";
-
                 return (
                   <div
                     key={metric.id}
@@ -854,12 +820,9 @@ const Dashboard = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-2">
-                        <TrendIcon className={`w-4 h-4 ${trendColor}`} />
-                        <span className="text-lg font-semibold text-slate-800">
-                          {metric.value}
-                        </span>
-                      </div>
+                      <span className="text-lg font-semibold text-slate-800">
+                        {metric.value}
+                      </span>
                     </div>
                   </div>
                 );
@@ -873,4 +836,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
